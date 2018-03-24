@@ -1,0 +1,14 @@
+<header class="row spacing">
+            <nav class="col-md-8 col-md-offset-2">
+                <ul class="nav nav-tabs">
+                     <li routerLinkActive="active"><a [routerLink]="['infoAuto']">Info Auto-Ecole</a></li>
+                     <li routerLinkActive="active"><a [routerLink]="['profAuto']">Nos Professeurs</a></li>
+                     <li routerLinkActive="active"><a [routerLink]="['horaireAuto']">Nos horaires</a></li>
+                      <!--<li routerLinkActive="active" *ngIf="isLoggedIn()"><a [routerLink]="['logout']">Logout</a></li>-->
+               </ul>
+            </nav>
+        </header>
+        <div class="row spacing">
+           <router-outlet></router-outlet>
+        </div>
+

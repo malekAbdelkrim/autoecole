@@ -1,0 +1,120 @@
+<div class="col-md-8 col-md-offset-2">
+	 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+	 <div class="form-group">
+			<label for="titre"> Titre</label>
+			<input type="text"
+				   id="titre"
+				   class="form-control"
+                   formControlName="titre">
+	</div>
+
+	<div class="form-group">
+			<label for="description"> Desciption</label>
+			<input type="text"
+				   id="description"
+				   class="form-control"
+                   formControlName="description">
+	</div>
+
+	<select id="choixPromo" (change)="getChoix()" *ngIf="!updatePack">
+				<option value="">Choisir le type de pack</option>
+				<option value="1">Pack code</option>
+				<option value="2">Pack conduit</option>
+				<option value="3">Pack code et conduit</option>
+				
+		</select>
+
+	<div class="form-group" *ngIf="choix=='1' || choix=='3'">
+	<table>
+		<tr>
+			<td>
+				<label for="nb_heure_code"> Nb heure code </label>
+				<input type="number"
+					   id="nb_heure_code"
+					   class="form-control"
+	                   formControlName="nb_heure_code"
+	                   *ngIf="inputnbHeureCode">
+			</td>
+			 <input type="checkbox" id="illimite" value="illimite" (change)="isIllimite()"> Illimité
+			<td>
+				
+			</td>
+		</tr>
+	</table>
+			
+	</div>
+
+	<div class="form-group" *ngIf="choix=='2' || choix=='3'">
+			<label for="nb_heure_conduit"> Nb heure conduit</label>
+			<input type="number"
+				   id="nb_heure_conduit"
+				   class="form-control"
+                   formControlName="nb_heure_conduit">
+	</div>
+
+	<div class="form-group" *ngIf="choix=='1' ||choix=='2' || choix=='3'">
+			<label for="prix"> Prix </label>
+			<input type="number"
+				   id="prix"
+				   class="form-control"
+                   formControlName="prix"
+                   step=0.1>
+	</div>
+
+<!--Details de pack-->
+	<h2>Détail de pack</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Détail de pack</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td>
+				  <input type="text"
+				   id="detailPack"
+				   class="form-control"
+                   formControlName="detailPack">
+				</td>
+				<td>
+					<button type="button" (click)="ajouterDetail()">Ajouter détail</button>
+				</td>
+				
+
+				</tr>
+
+
+			<tr *ngFor="let item of detailsPack; let i = index">
+				<td>
+				  <input type="text"
+				   id="detailPackMod{{i}}"
+				   class="form-control"
+                 
+                   value={{item}}>
+				</td>
+				<td>
+						<table>
+							<tr>
+								<td>
+									 <button type="button" (click)="modifierDetail(i)">Modifier</button>
+								</td>
+								<td>
+									 <button type="button" (click)="supprimerDetail(i)">Supprimer</button>
+								</td>
+							</tr>
+						</table>
+					     
+				 </td>	
+					
+			</tr>
+			</tbody>
+		</table>
+	  <button
+                class="btn btn-primary"
+                type="submit"
+                >Ajouter</button>
+</form>
+</div>

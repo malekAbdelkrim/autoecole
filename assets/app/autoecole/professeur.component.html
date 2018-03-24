@@ -1,0 +1,68 @@
+<!--<table>
+    <tr *ngFor="let row of nbRow">
+        <td>{{longeur[row*1]}}</td>
+        <td>{{longeur[row*2]}}</td>
+        <td>{{longeur[row*3]}}</td>
+    </tr>
+</table>-->
+
+<table class="table table-striped">
+    <tr>
+        <td width="33%">
+           <div class="card card-user">
+            <div class="image">
+                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
+            </div>
+            <div class="content">
+                 <button type="button" class="btn btn-success btn-s" (click)="ajouterProf()">
+                    <i class="glyphicon glyphicon-plus"></i>&nbsp;Ajouter un nouveau professeur
+                </button>
+            </div>
+          </div>
+        </td>
+        <td width="33%"></td>
+        <td width="33%"></td>
+    </tr>
+
+
+        <tr *ngFor="let i of nbRow">
+        <td *ngFor= "let j of nbColonne">
+
+            <div class="card card-user" *ngIf='listProf[(i*j)-1]!== undefined'>
+                            <div class="image">
+                                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
+                            </div>
+                            <div class="content">
+                                <div class="author">
+                                     <a href="#">
+                                    <img class="avatar border-gray" src={{listProf[(i*j)-1].img}} alt="..."/>
+
+                                      <h4 class="title">{{listProf[i*j-1].nom}} {{listProf[(i*j)-1].prenom}}<br />
+                                         <small>C'est un professeur de {{listProf[(i*j)-1].type_cours}}</small>
+                                      </h4>
+                                    </a>
+                                </div>
+                                <p class="description text-center"> {{listProf[(i*j)-1].email}} <br>
+                                                    {{listProf[(i*j)-1].telephone}} <br>
+                                                    {{listProf[(i*j)-1].adresse}}
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-warning btn-s" (click)="updateProf((i*j)-1)">
+                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;Modifier
+                                </button>
+
+                                <button type="button" class="btn btn-danger btn-s" (click)="removeProf((i*j)-1)">
+                                 <i class="glyphicon glyphicon-remove"></i>&nbsp;Supprimer
+                                </button>
+                
+                               
+                            </div>
+                        </div>
+        </td>
+    </tr>
+</table>
+       
+
+                

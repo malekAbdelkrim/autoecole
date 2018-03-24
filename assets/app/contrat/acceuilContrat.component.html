@@ -1,0 +1,83 @@
+<button type="button" class="btn btn-primary" (click)="ajouterContrat()">
+Ajouter un nouveau contrat</button>
+
+
+<h2>Accueil de le contrat </h2>
+
+<!--<input type="text" id="user" [(ngModel)]="term">
+       <ul  class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center"  *ngFor = "let item of listUser|filter:term; let i=index">
+        <div (click)="getNomUtilisateur(i)">
+        		<img src={{item.image}}>
+	        	<p>
+	            {{item.nomComplet}}
+	           </p>
+        </div>
+        
+       		
+       	</li>
+       </ul>
+-->
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th> <input type="text" [(ngModel)]="queryString" id="search" placeholder="Search to type"></th>
+        <th>Date de l'inscription</th>
+        <th>Date Examen Code</th>
+        <th>Date Examen Conduit</th>
+        <th>Reussite de examen code</th>
+        <th>Reussite de examen conduit</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+  
+      <tr *ngFor = "let item of listContrat | FilterPipe: queryString; let i= index">
+
+        <td>
+          {{item.nomComplet}}
+        </td>
+        <td>
+          {{item.dateInscription}}
+        </td>
+        <td>
+            <angular2-date-picker [(ngModel)]="date[i]" [settings]="settings" (onDateSelect)="updateDateExamenCode($event,i)"></angular2-date-picker>
+            <p id="dateexamencode{{i}}">Pas encore fixer</p>
+
+
+        </td>
+        <td>
+          <angular2-date-picker [(ngModel)]="date[i]" [settings]="settings" (onDateSelect)="updateDateExamenConduit($event,i)"></angular2-date-picker>
+            <p id="dateexamenconduit{{i}}">Pas encore fixer</p>
+        </td>
+        <td>
+            <input type="radio" name="reussicode" value="encore" id="encorecode{{i}}" autocomplete="off" (change)="reussiCode(i)"> Pas encore
+            <input type="radio" name="reussicode" value="reussi" id="reussicode{{i}}" autocomplete="off" (change)="reussiCode(i)"> Réussi
+            <input type="radio" name="reussicode" value="echoue" id="echouecode{{i}}" autocomplete="off" (change)="reussiCode(i)"> Echoué
+             
+        </td>
+         <td>
+            <input type="radio" name="reussiconduit" value="encore" id="encoreconduit{{i}}" autocomplete="off" (change)="reussiConduit(i)"> Pas encore
+            <input type="radio" name="reussiconduit" value="reussi" id="reussiconduit{{i}}" autocomplete="off" (change)="reussiConduit(i)"> Réussi
+            <input type="radio" name="reussiconduit" value="echoue" id="echoueconduit{{i}}" autocomplete="off" (change)="reussiConduit(i)"> Echoué
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="modifierContrat(i)">Modifier</button>
+          <button type="button" class="btn btn-danger" (click)="supprimerContrat(i)">Supprimer</button>
+          <button type="button" class="btn btn-info" (click)="infoContrat(i)">Voir les détails</button>
+        </td>
+      </tr>
+
+      
+    </tbody>
+</table>
+ 
+
+
+
+ 
+ 
+              
+             
+     

@@ -1,0 +1,141 @@
+<div class="col-md-8 col-md-offset-2">
+	 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+		<div class="form-group">
+			<label for="code"> Code</label>
+			<input type="text"
+				   id="code"
+				   class="form-control"
+                   formControlName="code">
+		</div>
+
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="text"
+				   id="email"
+				   class="form-control"
+                   formControlName="email">
+		</div>
+
+		<div class="form-group">
+			<label for="nom">Nom</label>
+			<input type="text"
+				   id="nom"
+				   class="form-control"
+                   formControlName="nom"
+                   >
+		</div>
+
+		<div class="form-group">
+			<label for="description">Description</label>
+			<input type="text"
+				   id="description"
+				   class="form-control"
+                   formControlName="description">
+		</div>
+
+		<div class="form-group">
+			<label for="facebook">Facebook</label>
+			<input type="text"
+				   id="facebook"
+				   class="form-control"
+                   formControlName="facebook">
+		</div>
+
+		<div class="form-group">
+			<label for="twitter">Twitter</label>
+			<input type="text"
+				   id="twitter"
+				   class="form-control"
+                   formControlName="twitter">
+		</div>
+
+		<div class="form-group">
+			<label for="instagram">Instagram</label>
+			<input type="text"
+				   id="instagram"
+				   class="form-control"
+                   formControlName="instagram">
+		</div>
+
+		<div class="form-group">
+			<label for="adresse">Adresse</label>
+			<input type="text"
+				   id="adresse"
+				   class="form-control"
+                   formControlName="adresse">
+		</div>
+
+		<div class="form-group">
+			<label for="map">Map</label>
+			<input type="text"
+				   id="map"
+				   class="form-control"
+                   formControlName="map">
+		</div>
+		
+
+		<div class="form-group">
+		<label for="logo">Logo</label>
+		<input id="logo" 
+			   type="file" 
+			   (change)="fileChangeEvent($event)" 
+			   placeholder="Upload a file..." 
+			   class="form-control"
+               formControlName="logo"
+			   />
+
+				<button type="button" class="btn btn-success btn-s" (click)="upload()" [disabled]="isUpload">
+				    <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload
+				</button>
+				<img id="logoImg" width="50" height="50" src={{logo}} *ngIf="existAuto">
+		</div>
+		
+		<div class="form-group">
+			<label for="proprietaire">Nom proprietaire</label>
+			<input type="text"
+				   id="proprietaire"
+				   class="form-control"
+                   formControlName="proprietaire">
+		</div> 
+
+
+		<div class="form-group">
+			<label for="telephone">Télephone</label>
+			<input type="text"
+				   id="telephone"
+				   class="form-control"
+                   formControlName="telephone">
+		</div>
+
+		<div class="form-group">
+			<label for="prc">Prix heure code </label>
+			<input type="number"
+				   id="prc"
+				   class="form-control"
+                   formControlName="prc">
+		</div>
+		<div class="form-group">
+			<label for="prcd">Prix heure conduit</label>
+			<input type="number"
+				   id="prcd"
+				   class="form-control"
+                   formControlName="prcd">
+		</div>
+ 			 <button
+                class="btn btn-primary"
+                type="submit"
+                *ngIf= "existAuto"
+                
+               
+                >Modifier</button>
+                 <button
+                class="btn btn-primary"
+                type="submit"
+                *ngIf= "!existAuto"
+              	[disabled]="!myForm.valid || !isUpload"
+               
+                >Ajouter</button>
+	 </form>
+	
+</div>

@@ -1,0 +1,114 @@
+<div>
+	<h2>Pack Code</h2>
+	<table>
+		<thead>
+			<th>Pack</th>
+			<th>Prix</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of arrayPackCode; let i = index">
+			<td>
+			 <table>
+				<tr>{{item.titre}}</tr>
+				<tr>{{item.description}}</tr>
+				<tr>
+					<ul>
+						<li *ngFor="let detail of detailsPackCode[i]">{{detail}}</li>
+					</ul>
+				</tr>
+			 </table>
+			</td>
+			<td>{{item.prix}}</td>
+			<td>
+					<button type="button" (click)="modifierPackCode(i)">Modifier</button>
+					<button type="button" (click)="supprimerPackCode(i)">Supprimer</button>
+			</td>
+				
+			</tr>
+			
+		</tbody>
+	</table>
+</div>
+
+
+
+<div>
+	<h2>Pack Conduit</h2>
+
+	<table>
+		<thead>
+			<th>Pack</th>
+			<th>Prix</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of arrayPackConduit; let i = index">
+			<td>
+			 <table>
+				<tr>{{item.titre}}</tr>
+				<tr>{{item.description}}</tr>
+				<tr>
+					<ul>
+						<li *ngFor="let detail of detailsPackConduit[i]">{{detail}}</li>
+					</ul>
+				</tr>
+			 </table>
+			</td>
+			<td>{{item.prix}}</td>
+			<td>
+				
+					<button type="button" (click)="modifierPackConduit(i)">Modifier</button>
+					<button type="button" (click)="supprimerPackConduit(i)">Supprimer</button>
+				
+			</td>
+				
+			</tr>
+
+			
+		</tbody>
+	</table>
+</div>
+
+
+
+<div>
+	<h2>Pack Code et Conduit</h2>
+	<table>
+		<thead>
+			<th>Pack</th>
+			<th>Prix</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of arrayPackCodeConduit; let i = index">
+			<td>
+			 <table>
+				<tr>{{item.titre}}</tr>
+				<tr>{{item.description}}</tr>
+				<tr>
+					<ul>
+						<li *ngFor="let detail of detailsPackCodeConduit[i]">{{detail}}</li>
+					</ul>
+				</tr>
+			 </table>
+			</td>
+			<td>{{item.prix}}</td>
+			<td>
+				
+					<button type="button" (click)="modifierPackCodeConduit(i)">Modifier</button>
+					<button type="button" (click)="supprimerPackCodeConduit(i)">Supprimer</button>
+				
+			</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div>
+	<h3>Ajouter un autre pack</h3>
+	  <ul class="nav nav-pills">
+             <li routerLinkActive="active"><a (click)="cleanLocalStorage()" [routerLink]="['/updatePack']">Auto Ecole</a></li>      
+       </ul>
+</div>
+ <router-outlet></router-outlet>

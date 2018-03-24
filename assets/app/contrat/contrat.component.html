@@ -1,0 +1,183 @@
+<div class="col-md-8 col-md-offset-2">
+	 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+	 <div class="form-group">
+			<label for="nomUtilisateur"> Nom Utilisateur</label>
+			<input type="text"
+				   id="nomUtilisateur"
+				   class="form-control"
+                   formControlName="nomUtilisateur">
+	</div>
+
+	<div class="form-group">
+			<label for="email"> Email</label>
+			<input type="text"
+				   id="email"
+				   class="form-control"
+                   formControlName="email">
+	</div>
+
+	<div class="form-group">
+			<label for="telephone"> Télephone</label>
+			<input type="text"
+				   id="telephone"
+				   class="form-control"
+                   formControlName="telephone">
+	</div>
+
+	<div class="form-group">
+			<label for="cin"> CIN</label>
+			<input type="text"
+				   id="cin"
+				   class="form-control"
+                   formControlName="cin">
+	</div>
+
+	<div *ngIf="existPack">
+		<h3>Nos packs</h3>
+		<table>
+			<tr>
+				<td>
+					<h4>Les packs de code</h4>
+					  
+					<ul>
+					<div *ngFor="let pack of listPack; let i = index">
+						<li *ngIf="pack.type_pack == packCode">
+							 <input type="checkbox" name="pack" value={{pack.idPack}} id={{pack.idPack}} (change)="getCheckedPack(i)"> {{pack.titre}}
+						</li>
+					</div>
+						
+					</ul>
+				</td>
+
+				<td>
+					<h4>Les packs de conduit</h4>
+					  
+					<ul>
+					<div *ngFor="let pack of listPack; let i = index">
+						<li *ngIf="pack.type_pack == packConduit">
+							 <input type="checkbox" name="pack" value={{pack.idPack}} id={{pack.idPack}} (change)="getCheckedPack(i)"> {{pack.titre}}
+						</li>
+					</div>
+						
+					</ul>
+				</td>
+
+				<td>
+					<h4>Les packs de code et conduit</h4>
+					  
+					<ul>
+					<div *ngFor="let pack of listPack; let i = index">
+						<li *ngIf="pack.type_pack == packCodeConduit">
+							 <input type="checkbox" name="pack" value={{pack.idPack}} id={{pack.idPack}} (change)="getCheckedPack(i)"> {{pack.titre}}
+						</li>
+					</div>
+						
+					</ul>
+				</td>
+				<td *ngIf="existPackPromo">
+					<h4>Le pack de promotion</h4>
+					  
+					<ul>
+					<div *ngFor="let pack of listPack; let i = index">
+						<li *ngIf="pack.type_pack == 'promotion'">
+							 <input type="checkbox" name="pack" value={{pack.idPack}} id={{pack.idPack}} (change)="getCheckedPack(i)"> {{pack.titre}}
+						</li>
+					</div>
+						
+					</ul>
+				</td>
+
+			</tr>
+			
+		</table>
+	</div>
+	<div>
+		<h3>Ajouter des heures supplimentaires de code et de conduit</h3>
+		<div class="form-group">
+			<label for="nb_heure_conduit_supp"> Nombre heure conduit supplémentaire</label>
+			<input type="number"
+				   id="nb_heure_conduit_supp"
+				   class="form-control"
+                   formControlName="nb_heure_conduit_supp"
+					(keyup)="getnb_heure_conduit_supp()"
+                   >
+	    </div>
+
+	    <div class="form-group">
+			<label for="nb_heure_code_supp"> Nombre heure code supplémentaire</label>
+			<input type="number"
+				   id="nb_heure_code_supp"
+				   class="form-control"
+                   formControlName="nb_heure_code_supp"
+                   (keyup)="getnb_heure_code_supp()"
+                   >
+	    </div>
+
+	</div>
+	<div *ngIf="promoPersonneRedu.length>0">
+		<h3>Promotion sur le nombre de personne: <br>
+			combien de personne qu'on a !!!
+		</h3>
+		<ul>
+			<li>
+				<input type="radio" id="reductionPer" value='aucune' name="reductionPer" (change)="getReductionPersonne('aucune')" checked> 
+				Aucune promotion
+			</li>
+			<div *ngFor="let item of promoPersonneRedu; let i=index">
+				<li *ngIf="item.personne2 === 'illimité'">
+					 <input type="radio" id="reductionPer{{i}}" value={{i}} name="reductionPer" (change)="getReductionPersonne(i)"> 
+						 Entre {{item.personne1}} et +
+
+				</li>
+				<li *ngIf="item.personne2 !== 'illimité'">
+					 <input type="radio" id="reductionPer{{i}}" value={{i}} name="reductionPer" (change)="getReductionPersonne(i)"> 
+						 Entre {{item.personne1}} et {{item.personne2}}
+
+				</li>
+			</div>
+		</ul>
+	</div>
+
+	<div>
+		Nombre de heure de code en totale: {{nbHeureCodeTotal}}
+		<br>Nombre de heure de conduit en totale: {{nbHeureConduitTotal}}
+		<br> Prix de totalité :{{prixTotal}}
+
+	</div>
+
+	<div *ngIf="existPromo">
+		<h4>Le prix aprés la promotion : {{prixPromo}}</h4>
+	</div>
+	 <button
+                class="btn btn-primary"
+                type="submit"
+                >Ajouter</button>
+	</form>
+
+</div>
+
+   <div *ngIf="!updateContrat">
+        <input type="text" id="user" [(ngModel)]="term">
+       <ul  class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center"  *ngFor = "let item of listUser|filter:term; let i=index">
+        <div (click)="getNomUtilisateur(i)">
+        		<img src={{item.image}}>
+	        	<p>
+	            {{item.nomComplet}}
+	           </p>
+        </div>
+        
+       		
+       	</li>
+       </ul> 
+     </div>
+       
+	<!--<div *ngFor = "let item of listUser |filter:term" >
+         <img src={{item.image}}>
+          <p>
+            {{item.nomComplet}}
+          </p>
+        </div>
+ 
+    </div> -->

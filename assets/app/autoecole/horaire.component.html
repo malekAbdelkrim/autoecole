@@ -1,0 +1,171 @@
+<div class="col-md-8 col-md-offset-2">
+	 <form (ngSubmit)="onSubmit()">
+		<table class="table">
+			<thead>
+		      <tr>
+		        <th>Jour</th>
+		        <th>Heure départ matin</th>
+		        <th>Heure fin matin</th>
+		        <th>Heure départ soir</th>
+		        <th>Heure fin soir</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    	<tr>
+		    		<td>Lundi</td>
+		    		<td><input type="time"
+		    				   id="matinOuv1"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="matinFerm1"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirOuv1"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirFerm1"
+		    				   class="form-control"></td>
+
+		    		<td>
+		    		<button type="button" class="btn btn-success btn-s" (click)="modifier(1)" *ngIf= "existHoraire">
+				   		Modifier
+				   </button>
+		    		</td>
+		    	</tr>
+
+		    	<tr>
+		    		<td>Mardi</td>
+		    		<td><input type="time"
+		    				   id="matinOuv2"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="matinFerm2"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				  	id="soirOuv2"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirFerm2"
+		    				   class="form-control"></td>
+		    		<td>
+		    		<button type="button" class="btn btn-success btn-s" (click)="modifier(2)" *ngIf= "existHoraire">
+				   		Modifier
+				   </button>
+		    		</td>
+		    	</tr>
+
+		    	<tr>
+		    		<td>Mercredi</td>
+		    		<td><input type="time"
+		    				    id="matinOuv3"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="matinFerm3"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				    id="soirOuv3"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				    id="soirFerm3"
+		    				   class="form-control"></td>
+		    		<td>
+		    		<button type="button" class="btn btn-success btn-s" (click)="modifier(3)" *ngIf= "existHoraire">
+				   		Modifier
+				   </button>
+		    		</td>
+		    	</tr>
+
+		    	<tr>
+		    		<td>Jeudi</td>
+		    		<td><input type="time"
+		    				    id="matinOuv4"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="matinFerm4"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirOuv4"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirFerm4"
+		    				   class="form-control"></td>
+		    		<td>
+		    		<button type="button" class="btn btn-success btn-s" (click)="modifier(4)" *ngIf= "existHoraire">
+				   		Modifier
+				   </button>
+		    		</td>
+		    	</tr>
+
+		    	<tr>
+		    		<td>Vendredi</td>
+		    		<td><input type="time"
+		    				   id="matinOuv5"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="matinFerm5"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirOuv5"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirFerm5"
+		    				   class="form-control"></td>
+		    		<td>
+		    		<button type="button" class="btn btn-success btn-s" (click)="modifier(5)" *ngIf= "existHoraire">
+				   		Modifier
+				   </button>
+		    		</td>
+		    	</tr>
+
+		    	<tr>
+		    		<td>Samedi</td>
+		    		<td><input type="time"
+		    				   id="matinOuv6"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="matinFerm6"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirOuv6"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirFerm6"
+		    				   class="form-control"></td>
+		    	    <td>
+		    		<button type="button" class="btn btn-success btn-s" (click)="modifier(6)" *ngIf= "existHoraire">
+				   		Modifier
+				   </button>
+		    		</td>
+		    	</tr>
+
+		    	<tr>
+		    		<td>Dimanche</td>
+		    		<td><input type="time"
+		    				   id="matinOuv0"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="matinFerm0"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirOuv0"
+		    				   class="form-control"></td>
+		    		<td><input type="time"
+		    				   id="soirFerm0"
+		    				   class="form-control"></td>
+		    		<td>
+		    		<button type="button" class="btn btn-success btn-s" (click)="modifier(0)" *ngIf= "existHoraire">
+				   		Modifier
+				   </button>
+		    		</td>
+		    	</tr>
+		    </tbody>
+					
+		</table>
+
+                 <button
+                class="btn btn-primary"
+                type="submit"
+                 *ngIf= "!existHoraire"
+                >Ajouter</button>
+	 </form>
+</div>

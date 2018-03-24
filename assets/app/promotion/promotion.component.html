@@ -1,0 +1,434 @@
+<div class="col-md-8 col-md-offset-2">
+	 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+		<div class="form-group">
+			<label for="title"> Title</label>
+			<input type="text"
+				   id="title"
+				   class="form-control"
+                   formControlName="title">
+		</div>
+
+		<div class="form-group">
+			<label for="description"> Description</label>
+			<input type="text"
+				   id="description"
+				   class="form-control"
+                   formControlName="description">
+		</div>
+
+
+		<div class="form-group">
+			<label for="date_depart"> Date Départ</label>
+			<input type="date"
+				   id="date_depart"
+				   class="form-control"
+                   formControlName="date_depart">
+		</div>
+
+		<div class="form-group">
+			<label for="date_exp"> Date Expiration</label>
+			<input type="date"
+				   id="date_exp"
+				   class="form-control"
+                   formControlName="date_exp">
+		</div>
+
+		<div class="form-group">
+		<label for="image">Image</label>
+		<input id="image" 
+			   type="file" 
+			   (change)="fileChangeEvent($event)" 
+			   placeholder="Upload a file..." 
+			   class="form-control"
+               formControlName="image">
+
+				<button type="button" class="btn btn-success btn-s" (click)="upload()" [disabled]="isUpload">
+				    <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload
+				</button>
+				
+		</div>
+
+		<select id="choixPromo" (change)="getChoix()" *ngIf="!updatePromo">
+				<option value="">Choisir un type de promotion</option>
+				<option value="1">Ajouter un pack de promotion</option>
+				<option value="2">Promotion sur les packs</option>
+				<option value="3">Promotion sur les prix de heure et conduit</option>
+				<option value="4">Promotion sur la totalité d'argent paié en pourcentage</option>
+				<option value="5">Promotion sur le nombre de personne en pourcentage</option>
+		</select>
+
+		
+
+		<!--Ce code pour ajouter les nouveau pack de promotion == 1 -->
+		<div *ngIf="choix=='1'">
+			<div class="form-group">
+			<label for="nbHeureConduit"> Nombre de heure de conduit</label>
+			<input type="number"
+				   id="nbHeureConduit"
+				   class="form-control"
+                   formControlName="nbHeureConduit">
+		</div>
+		<div class="form-group">
+			<label for="nbHeureCode"> Nombre de heure de code</label>
+			<input type="number"
+				   id="nbHeureCode"
+				   class="form-control"
+                   formControlName="nbHeureCode">
+		</div>
+
+		<div class="form-group">
+			<label for="prixPack"> Prix</label>
+			<input type="number"
+				   id="prixPack"
+				   class="form-control"
+                   formControlName="prixPack"
+                   step=0.1>
+		</div>
+		</div>	
+
+		<!--Ce code concerne la promotion sur les pack-->
+			<div *ngIf="choix=='2'">
+
+			<div class="form-group">
+			<label for="promoPackCode"> Promotion sur les packs de code </label>
+			<input type="number"
+				   id="promoPackCode"
+				   class="form-control"
+                   formControlName="promoPackCode"
+                   step=0.1>
+			</div>
+			<div class="form-group">
+				<label for="promoPackConduit"> Promotion sur les packs de conduit</label>
+				<input type="number"
+					   id="promoPackConduit"
+					   class="form-control"
+	                   formControlName="promoPackConduit"
+	                   step=0.1>
+			</div>
+
+			<div class="form-group">
+				<label for="promoPackCodeConduit"> Promotion sur les packs de code et conduit</label>
+				<input type="number"
+					   id="promoPackCodeConduit"
+					   class="form-control"
+	                   formControlName="promoPackCodeConduit"
+	                   step=0.1>
+			</div>
+			</div>	
+
+			
+		<!--Ce code pour ajouter un nouveau prix pour le code et me conduit-->
+		<div *ngIf="choix=='3'">
+			
+		<div class="form-group">
+			<label for="prix_code"> Prix de code </label>
+			<input type="number"
+				   id="prix_code"
+				   class="form-control"
+                   formControlName="prix_code"
+                   step=0.1>
+		</div>
+
+		<div class="form-group">
+			<label for="prix_conduit"> Prix de conduit</label>
+			<input type="number"
+				   id="prix_conduit"
+				   class="form-control"
+                   formControlName="prix_conduit"
+                   step=0.1>
+		</div>
+		</div>	
+
+
+		<!--Ce code concerne promotion sur la totalité d'argent payé-->
+		<div *ngIf="choix=='4'">
+		<table>
+			<thead>
+				<tr>
+					<th>Prix1</th>
+					<th>Prix2</th>
+					<th>Réduction</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td>
+					<input type="number"
+						   id="prix1"
+						   class="form-control"
+		                   formControlName="prix1"
+		                   step=0.1>
+				</td>
+					
+				<td>
+					<table>
+						<tr>
+							<td>
+								<input type="number"
+									   id="prix2"
+									   class="form-control"
+					                   formControlName="prix2"
+					                   step=0.1 *ngIf="inputPrix2">
+							</td>
+							<td>
+								   <input type="checkbox" id="illimite" value="illimite" (change)="isIllimite()"> Illimité
+							</td>
+						</tr>
+					</table>
+					
+				</td>	
+
+				<td>
+				<input type="number"
+						   id="reduction"
+						   class="form-control"
+		                   formControlName="reduction"
+		                   step=0.1>                
+		            
+				</td>	
+				<td>
+					<button type="button" (click)="ajouterReduction()">Ajoute</button>
+		            
+				</td>	
+
+
+
+				</tr>
+					<!--On va afficher tous les prix avec leur pourcentage de réduction-->
+				<tr *ngFor="let item of argentPourcentage; let i = index">
+						<td>
+						<input type="number"
+						   id="prix1Mod{{i}}"
+						   class="form-control"
+		                   step=0.1
+		                   value={{item.prix1}}>    
+						</td>
+
+						<td>
+						<table>
+							<tr>
+							<td>
+								<input type="number"
+								   id="prix2Mod{{i}}"
+								   class="form-control"
+				                   step=0.1
+				                   value={{item.prix2}}
+				                   *ngIf="verfierIllimite(item.prix2)">
+				                   
+							</td>
+							<td>
+							
+							<small *ngIf="!verfierIllimite(item.prix2)">Iliimité</small>  
+							</td>
+								
+							</tr>
+						</table>
+						</td>
+
+						<td>
+						<input type="number"
+						   id="reductionMod{{i}}"
+						   class="form-control"
+		                   step=0.1
+		                     value={{item.reduction}}>    
+						</td>
+
+						<td>
+						<table>
+							<tr>
+								<td>
+									 <button type="button" (click)="modifierReduction(i)">Modifier</button>
+								</td>
+								<td>
+									 <button type="button" (click)="SupprimerReduction(i)">Supprimer</button>
+								</td>
+							</tr>
+						</table>
+					     
+				      </td>	
+
+					
+				</tr>
+			</tbody>
+		</table>
+
+			
+		</div>
+
+
+		<!--Ce code concerne promotion sur nombre de personne qui s'inscrit-->
+		<div *ngIf="choix=='5'">
+		<table>
+			<thead>
+				<tr>
+					<th>Nbre de personne1</th>
+					<th>Nbre de personne2</th>
+					<th>Réduction</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td>
+					<input type="number"
+						   id="nbpersonne1"
+						   class="form-control"
+		                   formControlName="nbpersonne1"
+		                   step=0.1>
+				</td>
+					
+				<td>
+					<table>
+						<tr>
+							<td>
+								<input type="number"
+									   id="nbpersonne2"
+									   class="form-control"
+					                   formControlName="nbpersonne2"
+					                   step=0.1 *ngIf="inputPersonne2">
+							</td>
+							<td>
+								   <input type="checkbox" id="illimitePersonne" value="illimite" (change)="isIllimitePersonne()"> Illimité
+							</td>
+						</tr>
+					</table>
+					
+				</td>	
+
+				<td>
+				<input type="number"
+						   id="reductionPersonne"
+						   class="form-control"
+		                   formControlName="reductionPersonne"
+		                   step=0.1>                
+		            
+				</td>	
+				<td>
+					<button type="button" (click)="ajouterReductionPersonne()">Ajoute</button>
+		            
+				</td>	
+
+
+
+				</tr>
+					<!--On va afficher tous les prix avec leur pourcentage de réduction-->
+			<tr *ngFor="let item of personneReduction; let i = index">
+						<td>
+						<input type="number"
+						   id="nbpersonne1Mod{{i}}"
+						   class="form-control"
+		                   step=0.1
+		                   value={{item.personne1}}>    
+						</td>
+
+						<td>
+						<table>
+							<tr>
+							<td>
+								<input type="number"
+								   id="nbpersonne2Mod{{i}}"
+								   class="form-control"
+				                   step=0.1
+				                   value={{item.personne2}}
+				                   *ngIf="verfierIllimite(item.personne2)">
+				                   
+							</td>
+							<td>
+							
+							<small *ngIf="!verfierIllimite(item.personne2)">Iliimité</small>  
+							</td>
+								
+							</tr>
+						</table>
+						</td>
+
+						<td>
+						<input type="number"
+						   id="reductionPersonneMod{{i}}"
+						   class="form-control"
+		                   step=0.1
+		                     value={{item.reduction}}>    
+						</td>
+
+						<td>
+						<table>
+							<tr>
+								<td>
+									 <button type="button" (click)="modifierReductionPersonne(i)">Modifier</button>
+								</td>
+								<td>
+									 <button type="button" (click)="SupprimerReductionPersonne(i)">Supprimer</button>
+								</td>
+							</tr>
+						</table>
+					     
+				      </td>	
+
+					
+				</tr>
+			</tbody>
+		</table>
+
+			
+		</div>
+
+
+		<!--Partie de détail-->
+		<h2>Détail de promotion</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Détail de promotion</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td>
+				  <input type="text"
+				   id="detailPromo"
+				   class="form-control"
+                   formControlName="detailPromo">
+				</td>
+				<td>
+					<button type="button" (click)="ajouterDetail()">Ajouter détail</button>
+				</td>
+				
+
+				</tr>
+
+
+			<tr *ngFor="let item of detailsPromo; let i = index">
+				<td>
+				  <input type="text"
+				   id="detailPromoMod{{i}}"
+				   class="form-control"
+                 
+                   value={{item}}>
+				</td>
+				<td>
+						<table>
+							<tr>
+								<td>
+									 <button type="button" (click)="modifierDetail(i)">Modifier</button>
+								</td>
+								<td>
+									 <button type="button" (click)="SupprimerDetail(i)">Supprimer</button>
+								</td>
+							</tr>
+						</table>
+					     
+				 </td>	
+					
+			</tr>
+			</tbody>
+		</table>
+		  <button
+                class="btn btn-primary"
+                type="submit"
+                >Ajouter</button>
+		 
+	</form>
+</div>

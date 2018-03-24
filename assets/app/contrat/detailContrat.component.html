@@ -1,0 +1,129 @@
+<h3>
+	les details de contrat
+</h3>
+<table class="table table-striped">
+	<tr>
+		<td>
+			Le nom de client
+		</td>
+		<td>
+			{{contrat.nomComplet}}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Telephone
+		</td>
+		<td>
+			{{contrat.telephone}}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Email
+		</td>
+		<td>
+			{{contrat.email}}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			CIN
+		</td>
+		<td>
+			{{contrat.CIN}}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			La date d'inscription
+		</td>
+		<td>
+			{{contrat.dateInscription}}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Les packs choisis
+		</td>
+		<td>
+			<ul>
+				<li *ngFor="let item of listPackContrat">
+					{{item.titre}}
+				</li>
+			</ul>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Prix total
+		</td>
+		<td>
+			{{contrat.prixTotal}}
+		</td>
+	</tr>
+
+	<tr *ngIf="existPromo">
+		<td>
+			Prix aprés la promotion
+		</td>
+		<td>
+			{{contrat.prixTotalApresPromo}}
+		</td>
+	</tr>
+
+</table>
+<br>
+<h2>
+	les détails de paiement
+</h2>
+<table class="table">
+	<tr>
+		<th> Tranche de paie</th>
+		<th> Date de paiement</th>
+		<th></th>
+	</tr>
+
+	<tbody>
+		<tr *ngFor="let item of listPaiement; let i= index">
+			<td>
+				{{item.tranche}}
+			</td>
+			<td>
+				{{item.datePaiement}}
+			</td>
+			<td>
+				 <button type="button" class="btn btn-danger" (click)="supprimerTranche(i)" id="addTranche">Supprimer</button>
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+
+
+<button id="myBtn">Paier une tranche</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Paier une tranche</p>
+    <label for="telephone"> tranche</label>
+			<input type="number"
+				   id="tranche"
+			/>
+			 <button type="button" class="btn btn-primary" (click)="ajouterTranche()" id="addTranche">Paier une tranche</button>
+  </div>
+
+</div>
+<br/>
+  <h3>Vous avez paié : {{paiementTotal}}</h3><br>
+  <h3>Il vous reste: {{restePaiement}}</h3>

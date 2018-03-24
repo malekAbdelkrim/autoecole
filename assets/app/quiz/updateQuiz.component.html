@@ -1,0 +1,60 @@
+<div class="col-md-8 col-md-offset-2">
+	 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+		<div class="form-group">
+			<label for="question"> Question</label>
+			<input type="text"
+				   id="question"
+				   class="form-control"
+                   formControlName="question">
+		</div>
+
+		<div class="form-group">
+		<label for="image">Image Quiz </label>
+		<input id="image" 
+			   type="file" 
+			   (change)="fileChangeEvent($event)" 
+			   placeholder="Upload a file..." 
+			   class="form-control"
+               formControlName="image">
+
+				<button type="button" class="btn btn-success btn-s" (click)="upload()" [disabled]="isUpload">
+				    <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload
+				</button>
+				
+		</div>
+
+		<div class="form-group">
+			<h3>Les réponses posssibles : </h3>
+			<label for="rep1"> Reponse1</label>
+			<input type="text"
+				   id="rep1"
+				   class="form-control"
+                   formControlName="rep1"
+                   (keyup)="getReponse1()">
+
+           <label for="rep2"> Reponse2</label>
+		   <input type="text"
+				   id="rep2"
+				   class="form-control"
+                   formControlName="rep2"
+                   (keyup)="getReponse2()">
+
+           <label for="rep3"> Reponse3</label>
+			<input type="text"
+				   id="rep3"
+				   class="form-control"
+                   formControlName="rep3"
+                    (keyup)="getReponse3()">
+		</div>
+		  <input type="radio" id="rep1corr" value="rep1corr" name="correct" (change)="getChoix()" *ngIf="reponse1 != ''"> {{reponse1}}
+		  <input type="radio" id="rep2corr" value="rep2corr" name="correct" (change)="getChoix()" *ngIf="reponse2 != ''"> {{reponse2}}
+		  <input type="radio" id="rep3corr" value="rep3corr" name="correct" (change)="getChoix()" *ngIf="reponse3 != ''"> {{reponse3}}
+
+
+ <button
+                class="btn btn-primary"
+                type="submit"
+                >Ajouter</button>
+</form>
+</div>
