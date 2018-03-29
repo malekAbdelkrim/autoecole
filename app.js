@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var passport = require('passport');
+var session = require('express-session');
 
 var appRoutes = require('./routes/app');
 var autoRoutes = require('./routes/autoecole');
@@ -13,6 +15,10 @@ var packRoutes = require('./routes/pack');
 var coursRoutes = require('./routes/cours');
 var quizRoutes = require('./routes/quiz');
 var contratRoutes = require('./routes/contrat');
+var authRoutes = require('./routes/auth');
+var avisRoutes = require('./routes/avis');
+var playQuizRoutes = require('./routes/playQuiz');
+
 
 
 
@@ -39,6 +45,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//cpnfiguration de passport
+app.use(session({
+  secret: 's3cr3t',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Configuration de route
 app.use('/', appRoutes);
 app.use('/auto', autoRoutes);
@@ -47,6 +62,9 @@ app.use('/pack', packRoutes);
 app.use('/cours', coursRoutes);
 app.use('/quiz', quizRoutes);
 app.use('/contrat', contratRoutes);
+app.use('/auth', authRoutes);
+app.use('/avis', avisRoutes);
+app.use('/playQuiz', playQuizRoutes);
 
 
 

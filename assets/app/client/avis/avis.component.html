@@ -1,0 +1,86 @@
+<h3>
+	Donnez votre avis !!!
+</h3>
+
+<h2>Modal Example</h2>
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Ajouter votre avis</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Donnez votre avis</p>
+    
+    <table>
+    	<tr>
+    		<td *ngFor="let i of [0,1,2,3,4]">
+    			<img 
+    					src="/images/avis/car.png" 
+    					id="voiture{{i}}"
+    					(click)= "getNbVoiture(i)">
+    		</td>
+    	</tr>
+    </table>
+    <input 
+    		type="text"
+    		 name="avis"
+    		 id="avis">
+    <button 
+    		type="button"
+    		(click)="ajouterAvis()">
+    	Avis
+    </button>
+  </div>
+
+</div>
+
+<h2>
+    Afficher tous le commentaire qu'on a
+</h2>
+
+<table>
+    <tr *ngFor="let item of listAvis; let i=index">
+        <ul>
+            <li>
+                <table>
+                    <tr>
+                        <td *ngFor="let itemV of [0,1,2,3,4]">
+                            <img 
+                               src="/images/avis/car.png"
+                                *ngIf="itemV>=item.nbVoiture"
+                               />
+                                <img 
+                               src="/images/avis/carSele.png"
+                                *ngIf="itemV<item.nbVoiture"
+                               />
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            <li>
+                {{item.commentaire}}
+            </li>
+            <li>
+                {{item.dateCommentaire}}
+            </li>
+        </ul>
+        <table>
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-warning" (click)="modifierAvis(i)">
+                         Modifier
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="supprimerAvis(i)">
+                         Supprimer
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </tr>
+</table>

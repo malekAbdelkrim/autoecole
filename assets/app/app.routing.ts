@@ -1,9 +1,11 @@
 import { Routes, RouterModule } from "@angular/router";
 
 import { AUTO_ROUTES } from "./autoecole/auto.routes";
+import { AUTH_ROUTES } from "./client/auth/auth.routes";
 import { PACK_ROUTES } from "./pack/pack.routes";
 
 import { AutoComponent } from "./autoecole/auto.component";
+import { AuthentificationComponent } from "./client/auth/authentification.component";
 
 import{ AccueilPromoComponent } from "./promotion/accueilPromo.component";
 import{ PromotionComponent } from "./promotion/promotion.component";
@@ -31,6 +33,8 @@ import { DetailContratComponent } from "./contrat/detailContrat.component";
 const APP_ROUTES: Routes =[
 	{ path: '', redirectTo: 'auto', pathMatch: 'full' },
 	{ path: 'auto', component: AutoComponent , children: AUTO_ROUTES },
+
+	{ path: 'auth', component: AuthentificationComponent , children: AUTH_ROUTES },
 
 	{ path: 'promo', component: AccueilPromoComponent},
 	{ path: 'updatePromo', component: PromotionComponent},

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import { AppComponent } from "./app.component";
 import { AutoEcoleComponent } from "./autoecole/autoecole.component";
@@ -22,12 +23,20 @@ import { SerieComponent } from "./quiz/serie.component";
 import { QuizSerieComponent } from "./quiz/quizSerie.component";
 import { UpdateQuizComponent } from "./quiz/updateQuiz.component";
 
+
 import { ContratComponent } from "./contrat/contrat.component";
 import { AccueilContratComponent } from "./contrat/acceuilContrat.component";
 import { DetailContratComponent } from "./contrat/detailContrat.component";
 import { FilterPipe } from "./contrat/filterPipe.pipe";
 
+import { AuthentificationComponent } from "./client/auth/authentification.component";
+import { LogoutComponent } from "./client/auth/logout.component";
+import { SigninComponent } from "./client/auth/signin.component";
+import { SignupComponent } from "./client/auth/signup.component";
 
+import { AvisComponent } from "./client/avis/avis.component";
+
+import { PlayQuizComponent } from "./client/playQuiz/playQuiz.component";
 
 
 
@@ -38,6 +47,10 @@ import {  PackService } from "./pack/pack.service";
 import {  CoursService } from "./cours/cours.service";
 import {  QuizService } from "./quiz/quiz.service";
 import {  ContratService } from "./contrat/contrat.service";
+import {  AuthService } from "./client/auth/auth.service";
+import {  AvisService } from "./client/avis/avis.service";
+import {  PlayQuizService } from "./client/playQuiz/playQuiz.service";
+
 
 
 
@@ -72,7 +85,14 @@ import { routing } from "./app.routing";
         ContratComponent,
         AccueilContratComponent,
         DetailContratComponent,
-        FilterPipe
+        FilterPipe,
+        AuthentificationComponent,
+        LogoutComponent,
+        SigninComponent,
+        SignupComponent,
+        AvisComponent,
+        PlayQuizComponent 
+
     ],
     imports: [
         BrowserModule,
@@ -85,10 +105,19 @@ import { routing } from "./app.routing";
         ToastModule.forRoot()
         OwlDateTimeModule,
         OwlNativeDateTimeModule,
-        AngularDateTimePickerModule
+        AngularDateTimePickerModule,
+        NgCircleProgressModule.forRoot({
+    
+              radius: 100,
+              outerStrokeWidth: 16,
+              innerStrokeWidth: 8,
+              outerStrokeColor: "#78C000",
+              innerStrokeColor: "#C7E596",
+              animationDuration: 300
+        })
     ],
     bootstrap: [AppComponent],
-    providers: [AutoEcoleService, PromotionService, PackService, CoursService, QuizService, ContratService]
+    providers: [AutoEcoleService, PromotionService, PackService, CoursService, QuizService, ContratService, AuthService, AvisService, PlayQuizService]
 })
 export class AppModule {
 

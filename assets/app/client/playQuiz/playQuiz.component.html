@@ -1,0 +1,50 @@
+<h2>
+	
+	Play Quiz
+</h2>
+<circle-progress
+  id="circleProg"
+  [percent]="percent"
+  [radius]="100"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="8"
+  [outerStrokeColor]="'#78C000'"
+  [innerStrokeColor]="'#C7E596'"
+  [animation]="true"
+  [animationDuration]="300"
+></circle-progress>
+
+
+
+<div class="slideshow-container">
+<div *ngFor="let item of listQuiz; let i= index">
+<div class="mySlides">
+ <div class="numbertext">i / n</div>
+  <q>{{item.question}}</q><br>
+  <img src={{item.image}} width="100" height="100"> <br>
+  <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <input type="radio" name="reponse" value={{item.reponse1}} id="rep1_{{i}}" autocomplete="off" (change)="reponseQuiz(i)"> {{item.reponse1}}
+      </li>
+      <li class="list-group-item">
+        <input type="radio" name="reponse" value={{item.reponse2}} id="rep2_{{i}}" autocomplete="off" (change)="reponseQuiz(i)"> {{item.reponse2}}
+      </li>
+      <li class="list-group-item">
+          <input type="radio" name="reponse" value={{item.reponse3}} id="rep3_{{i}}" autocomplete="off" (change)="reponseQuiz(i)"> {{item.reponse3}}
+      </li>
+     
+  </ul>
+   <br>
+   <button
+   			type="button"
+   			(click)="plusSlides(1)">
+   	Suivant
+   </button>
+
+</div>
+</div>
+<!--<a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+<a class="next" (click)="plusSlides(1)">&#10095;</a>-->
+
+</div>
+

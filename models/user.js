@@ -8,7 +8,7 @@ var user = new Schema({
 	local: {
 		nom: {type : String},
 		prenom: {type: String},
-		email: {type: String, unique: true},
+		email: {type: String},
 		motPasse: {type: String},
 		image: {type: String},
 		dateNaissance: {type: Date},
