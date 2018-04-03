@@ -16,4 +16,28 @@ constructor(private http: Http){}
 					 .catch((response: Response) => Observable.throw(error.json));
 	}
 
+	/*findPlayQuiz(idUser,idSerie){
+	      const body = JSON.stringify({'idUser':idUser,'idSerie':idSerie});
+		  const headers = new Headers({'content-type': 'application/json'});
+		  return this.http.post('http://localhost:3000/playQuiz/findPlayQuiz', body, {headers: headers})
+					 .map((response: Response) => response.json())
+					 .catch((response: Response) => Observable.throw(error.json));
+	}*/
+
+	getScoreSerie(idUser,idSerie){
+		   const body = JSON.stringify({'idUser':idUser,'idSerie':idSerie});
+		  const headers = new Headers({'content-type': 'application/json'});
+		  return this.http.post('http://localhost:3000/playQuiz/getScoreSerie', body, {headers: headers})
+					 .map((response: Response) => response.json())
+					 .catch((response: Response) => Observable.throw(error.json));
+	}
+
+	removeAllQuiz(idUser,idSerie){
+	 		const body = JSON.stringify({'idUser':idUser,'idSerie':idSerie});
+		  const headers = new Headers({'content-type': 'application/json'});
+		  return this.http.post('http://localhost:3000/playQuiz/removeAllQuiz', body, {headers: headers})
+					 .map((response: Response) => response.json())
+					 .catch((response: Response) => Observable.throw(error.json));
+	}
+
 }

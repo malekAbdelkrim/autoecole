@@ -25,6 +25,10 @@ import { ContratComponent } from "./contrat/contrat.component";
 import { AccueilContratComponent } from "./contrat/acceuilContrat.component";
 import { DetailContratComponent } from "./contrat/detailContrat.component";
 
+import { ConsulterReponseComponent } from "./client/playQuiz/consulterReponse.component";
+import { PlayQuizComponent } from "./client/playQuiz/playQuiz.component";
+import { SeriePlayComponent } from "./client/playQuiz/seriePlay.component";
+
 
 
 
@@ -52,6 +56,10 @@ const APP_ROUTES: Routes =[
 	{ path: 'updateContrat/:id', component:  ContratComponent},
 	{ path: 'contrat', component: AccueilContratComponent},
 	{ path: 'detailContrat/:id', component: DetailContratComponent}
+
+	{ path: 'votreReponse/:id', component: ConsulterReponseComponent},
+	{ path: 'playQuiz', component: SeriePlayComponent},
+	{ path: 'playQuiz/:id', component: PlayQuizComponent}
 
 ];
 export const routing = RouterModule.forRoot(APP_ROUTES);

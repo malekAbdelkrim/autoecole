@@ -37,6 +37,8 @@ import { SignupComponent } from "./client/auth/signup.component";
 import { AvisComponent } from "./client/avis/avis.component";
 
 import { PlayQuizComponent } from "./client/playQuiz/playQuiz.component";
+import { SeriePlayComponent } from "./client/playQuiz/seriePlay.component";
+import { ConsulterReponseComponent } from "./client/playQuiz/consulterReponse.component";
 
 
 
@@ -91,7 +93,9 @@ import { routing } from "./app.routing";
         SigninComponent,
         SignupComponent,
         AvisComponent,
-        PlayQuizComponent 
+        PlayQuizComponent,
+        SeriePlayComponent,
+        ConsulterReponseComponent
 
     ],
     imports: [

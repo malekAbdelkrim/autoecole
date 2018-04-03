@@ -1,0 +1,25 @@
+Serie play of quiz 
+<table class="table">
+	<tbody>
+		<tr *ngFor="let item of listPlaySerie; let i=index">
+			<td>{{item.titreSerie}}</td>
+			<td>
+				<button
+					type="button"
+					(click)="jouerSerie(i)">
+					Jouer
+				</button>
+
+					<button
+					*ngIf="item.score!== undefined"
+					type="button"
+					(click)="voirReponse(i)">
+					consulter votre reponse
+				</button>
+			</td>
+			<td *ngIf="item.score!== undefined">{{item.score}}</td>
+			<td *ngIf="item.score!== undefined">{{item.dateReponse}}</td>
+			
+		</tr>
+	</tbody>
+</table>

@@ -5,5 +5,6 @@ export class PlayQuiz{
 				 public idQuiz: String,
 				 public dateReponse: String,
 				 public idUser: String,
+				 public titreSerie: String
 	){}
 };

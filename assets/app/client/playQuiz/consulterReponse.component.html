@@ -1,0 +1,59 @@
+<h2>
+	
+Voici votre reponse
+</h2>
+
+
+
+
+<div class="slideshow-container" align="center">
+
+<div class="mySlides" *ngFor="let item of listQuiz; let i= index">
+  
+  <h3 align="left">{{i+1}}-{{item.question}}</h3>
+  <img src={{item.image}} width="280" height="200"> <br/><br>
+  <ul class="list-group">
+    
+       <li class="list-group-item" *ngIf="item.reponse1 !== listReponse[i] && item.reponse1 !== item.repCorrect">
+        <h4>&nbsp;{{item.reponse1}}</h4>
+      </li>
+      <li class="list-group-item list-group-item-success" *ngIf="item.reponse1 === item.repCorrect">
+        <h4>&nbsp;{{item.reponse1}}</h4>
+      </li>
+       <li class="list-group-item list-group-item-danger" *ngIf="item.reponse1 === listReponse[i] && item.reponse1 !== item.repCorrect">
+        <h4>&nbsp;{{item.reponse1}}</h4>
+      </li>
+
+       <li class="list-group-item" *ngIf="item.reponse2 !== listReponse[i] && item.reponse2 !== item.repCorrect">
+        <h4>&nbsp;{{item.reponse2}}</h4>
+      </li>
+      <li class="list-group-item list-group-item-success" *ngIf="item.reponse2 === item.repCorrect">
+        <h4>&nbsp;{{item.reponse2}}</h4>
+      </li>
+       <li class="list-group-item list-group-item-danger" *ngIf="item.reponse2 === listReponse[i] && item.reponse2 !== item.repCorrect">
+        <h4>&nbsp;{{item.reponse2}}</h4>
+      </li>
+
+       <li class="list-group-item" *ngIf="item.reponse3 !== listReponse[i] && item.reponse3 !== item.repCorrect">
+        <h4>&nbsp;{{item.reponse3}}</h4>
+      </li>
+      <li class="list-group-item list-group-item-success" *ngIf="item.reponse3 === item.repCorrect">
+        <h4>&nbsp;{{item.reponse3}}</h4>
+      </li>
+       <li class="list-group-item list-group-item-danger" *ngIf="item.reponse3 === listReponse[i] && item.reponse3 !== item.repCorrect">
+        <h4>&nbsp;{{item.reponse3}}</h4>
+      </li>
+       <h4 *ngIf="listReponse[i] === null">Tu n'a pas repondu à cette question</h4>
+
+      
+     
+  </ul>
+   <br>
+
+
+</div>
+
+</div>
+
+  <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+<a class="next" (click)="plusSlides(1)">&#10095;</a>

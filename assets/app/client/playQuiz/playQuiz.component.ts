@@ -4,6 +4,7 @@ import { PlayQuizService } from "./playQuiz.service";
 
 import { Quiz } from "../../quiz/quiz.model";
 import { PlayQuiz } from "./playQuiz.model";
+import { Router , ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -18,18 +19,33 @@ export class PlayQuizComponent implements OnInit{
 	scoreQuiz = 0;
 	percent: number;
 	
-	constructor(private quizService :QuizService,private cd: ChangeDetectorRef, private playQuizService: PlayQuizService){}
+	constructor(private quizService :QuizService,private cd: ChangeDetectorRef, private playQuizService: PlayQuizService,private activatedRoute: ActivatedRoute, private router: Router){}
 
 	ngOnInit(){
 		//C'est l'id de série
-		this.id = "5a912efc3d01942b6ca95b10";
+		 this.sub = this.activatedRoute.params.subscribe(params => {
+
+      					 this.id = params['id'];
+       
+   			 });
+		//this.id = "5abf50e2076b2c1534405b73";
+
+		//A partir de localStorage
+		this.idUser = null;
+
 		this.scoreQuiz = 0;
-		this.percent =10;
-		 this.quizService.getAllQuizSerie(this.id).subscribe(
+		this.updatePlay = false;
+
+		console.log(this.id);
+		  this.quizService.getAllQuizSerie(this.id).subscribe(
 			data =>{ 
 					console.log("aussi la data");
 					console.log(data);
 					const i =0;
+					console.log("le reste est :"+ Math.floor(100%data.object.length));
+					this.percent =Math.floor(100%data.object.length);
+					this.ajouterPer = (100-Math.floor(100%data.object.length))/data.object.length;
+					console
 					for(i=0; i<data.object.length; i++){
 						const quiz = new Quiz(
 							data.object[i].question,
@@ -54,7 +70,15 @@ export class PlayQuizComponent implements OnInit{
 			error => console.log(error)
 		);
 
-		
+		this.playQuizService.getScoreSerie(this.idUser,this.id).subscribe(
+				data => {
+							console.log(data);
+							if(data.object.length>0){
+								this.updatePlay = true;
+							}
+							},
+				error => console.log(error)
+		);
 
 	}
 
@@ -62,7 +86,7 @@ export class PlayQuizComponent implements OnInit{
 	  this.showSlides(this.slideIndex += n);
 	  var circleProg = document.getElementById("circleProg");
 	   this.cd.detectChanges();
-	 	this.percent+= 30;
+	 	this.percent+= this.ajouterPer;
 
 	  //circleProg.percent = 20;
 	}
@@ -78,7 +102,7 @@ export class PlayQuizComponent implements OnInit{
  	 var i;
  	 this.cd.detectChanges();
   	var slides = document.getElementsByClassName("mySlides");
-  	if (n > slides.length) {this.slideIndex = 1 ; this.avoirResultat();}    
+  	if (n > slides.length) {this.avoirResultat();}    
   	if (n < 1) {this.slideIndex = slides.length}
 	  for (i = 0; i < slides.length; i++) {
 	      slides[i].style.display = "none";  
@@ -119,21 +143,94 @@ export class PlayQuizComponent implements OnInit{
  			}
  		}
  		console.log("le score est :"+this.scoreQuiz);
- 		for(var i=0;i<this.listQuiz.length;i++){
- 				const play = new PlayQuiz();
- 				play.reponseChoisi = this.listReponse[i];
- 				play.idSerie = this.id;
- 				play.idQuiz = this.id_Quiz[i];
- 				play.score = this.scoreQuiz;
- 				play.dateReponse = dt;
- 				play.idUser = null;
- 				console.log(play);
- 				this.playQuizService.ajouterReponse(play).subscribe(
- 						data => console.log(data),
- 						error => console.log(error)
- 				);
+ 		if(this.updatePlay === true){
+ 			this.playQuizService.removeAllQuiz(this.idUser,this.id).subscribe(
+ 					data=>{
+ 							console.log(data);
+ 							for(var i=0;i<this.listQuiz.length;i++){
+					 				const play = new PlayQuiz();
+					 				play.reponseChoisi = this.listReponse[i];
+					 				play.idSerie = this.id;
+					 				play.idQuiz = this.id_Quiz[i];
+					 				play.score = this.scoreQuiz;
+					 				play.dateReponse = dt;
+					 				play.idUser = this.idUser;
+					 				console.log(play);
+					 				this.playQuizService.ajouterReponse(play).subscribe(
+					 						data => {
+					 									console.log(data);
+					 									console.log("i="+i);
+					 									if(i=== this.listQuiz.length){
+					 										console.log("on va afficher le popup");
+					 										this.affichagePopup();
+					 										//this.router.navigate(['/playQuiz']);
+					 									}
+					 									},
+					 						error => console.log(error)
+					 				);
+					 		}
+
+
+ 							},
+ 					error => console.log(error)
+ 			);
+
+ 		}else{
+ 				for(var i=0;i<this.listQuiz.length;i++){
+					 				const play = new PlayQuiz();
+					 				play.reponseChoisi = this.listReponse[i];
+					 				play.idSerie = this.id;
+					 				play.idQuiz = this.id_Quiz[i];
+					 				play.score = this.scoreQuiz;
+					 				play.dateReponse = dt;
+					 				play.idUser = this.idUser;
+					 				console.log(play);
+					 				this.playQuizService.ajouterReponse(play).subscribe(
+					 						data => {
+					 									console.log(data);
+					 									console.log("i="+i);
+					 									if(i=== this.listQuiz.length){
+					 										console.log("on va afficher le popup");
+					 										this.affichagePopup();
+					 									}
+					 									},
+					 						error => console.log(error)
+					 				);
+					 		}
 
  		}
  		
+ 		
  	}
+
+ 	affichagePopup(){
+ 		var modal = document.getElementById('myModal');
+ 		var span = document.getElementsByClassName("close")[0];
+ 		if(this.scoreQuiz>1){
+ 				document.getElementById("msg1").innerHTML = "Félicitation !!!";
+ 				document.getElementById("msg2").innerHTML = "Vous avez la note de "+this.scoreQuiz+"/30";
+ 				 modal.style.display = "block";
+ 				 /*span.onclick = (() =>
+ 				  	console.log("malek1");
+				    modal.style.display = "none";
+				    console.log("malek2");
+				    this.router.navigate(['/playQuiz']);
+				   );*/
+ 		} else{
+ 			    document.getElementById("msg1").innerHTML = "Ouups !!!";
+ 				document.getElementById("msg2").innerHTML = "Désolé, votre note est"+this.scoreQuiz+"/30";
+ 				 modal.style.display = "block";
+ 				  /*span.onclick = (() =>
+ 				  	console.log("malek1");
+				    modal.style.display = "none";
+				    console.log("malek2");
+				     this.router.navigate(['/playQuiz']);
+				    );*/
+ 		}
+ 	}
+
+	colsePopup(){
+		this.router.navigate(['/playQuiz']);
+	}
+ 
 }

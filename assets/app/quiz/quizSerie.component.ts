@@ -32,7 +32,7 @@ export class QuizSerieComponent implements OnInit,AfterViewInit,AfterViewChecked
        this.id = params['id'];
        
     });
-
+    console.log(this.id);
     this.quizService.getAllQuizSerie(this.id).subscribe(
 			data =>{ 
 					console.log(data);
